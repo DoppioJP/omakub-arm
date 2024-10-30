@@ -1,5 +1,5 @@
 if [ "$(dpkg --print-architecture)" = "arm64" ]; then
-    snap install localsend
+    sudo snap install localsend
 else
     cd /tmp
     LOCALSEND_VERSION=$(curl -s "https://api.github.com/repos/localsend/localsend/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
