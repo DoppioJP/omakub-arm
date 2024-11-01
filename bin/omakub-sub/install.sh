@@ -12,13 +12,14 @@ CHOICES=(
 	"Spotify       Stream music from the world's most popular service"
 	"Steam         Play games from Valve's store"
 	"VirtualBox    Virtual machines to run Windows/Linux"
+	"VSCode        Microsoft Visual Studio Code"
 	"Zed           Fast all-purpose editor"
 	"Zoom          Attend and host video chat meetings"
 	"> All         Re-run any of the default installers"
 	"<< Back       "
 )
 
-CHOICE=$(gum choose "${CHOICES[@]}" --height 19 --header "Install application")
+CHOICE=$(gum choose "${CHOICES[@]}" --height 20 --header "Install application")
 
 if [[ "$CHOICE" == "<< Back"* ]] || [[ -z "$CHOICE" ]]; then
 	# Don't install anything
