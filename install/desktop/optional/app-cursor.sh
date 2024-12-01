@@ -3,10 +3,10 @@ TARGET_ARCH=$([ "$(dpkg --print-architecture)" = "arm64" ] && echo "arm64" || ec
 
 if [ "$TARGET_ARCH" = "arm64" ]; then
     # ARM64 installation
-    REPO="cursor-arm"
-    
+    REPO="coder/cursor-arm"
+
     # Get latest release version from GitHub API
-    LATEST_VERSION=$(curl -s "https://api.github.com/repos/coder/${REPO}/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
+    LATEST_VERSION=$(curl -s "https://api.github.com/repos/${REPO}/releases/latest" | grep -Po '"tag_name": "v\K[^"]*')
 
     # TODO: Check if the LATEST_VERSION is already installed
     # Properly created AppImage should give Version: ${LATEST_VERSION} in the output of `cursor.AppImage --appimage-version`
@@ -16,7 +16,7 @@ if [ "$TARGET_ARCH" = "arm64" ]; then
         echo "Some version of Cursor is already installed. Skipping download."
     else
         # Download AppImage
-        wget -O cursor.AppImage "https://github.com/coder/${REPO}/releases/download/v${LATEST_VERSION}/cursor_${LATEST_VERSION}_linux_${TARGET_ARCH}.AppImage"
+        wget -O cursor.AppImage "https://github.com/${REPO}/releases/download/v${LATEST_VERSION}/cursor_${LATEST_VERSION}_linux_${TARGET_ARCH}.AppImage"
         chmod +x cursor.AppImage
 
         # Create installation directory
