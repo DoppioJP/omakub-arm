@@ -11,7 +11,16 @@ chmod +x cursor.AppImage
 # Create installation directory
 sudo mkdir -p /opt/cursor
 sudo mv cursor.AppImage /opt/cursor/
-sudo ln -sf /opt/cursor/cursor.AppImage /usr/local/bin/cursor
+
+# Create wrapper script
+cat > /opt/cursor/cursor-wrapper.sh << 'EOF'
+#!/bin/bash
+/opt/cursor/cursor.AppImage --no-sandbox "$@"
+EOF
+chmod +x /opt/cursor/cursor-wrapper.sh
+
+# Update symlink to use wrapper instead of direct AppImage
+sudo ln -sf /opt/cursor/cursor-wrapper.sh /usr/local/bin/cursor
 
 # Create desktop entry
 mkdir -p ~/.local/share/applications
