@@ -20,10 +20,8 @@ else
 fi
 
 # Create wrapper script
-sudo cat > /opt/cursor/cursor-wrapper.sh << 'EOF'
-#!/bin/bash
-/opt/cursor/cursor.AppImage --no-sandbox "$@"
-EOF
+echo '#!/bin/bash
+/opt/cursor/cursor.AppImage --no-sandbox "$@"' | sudo tee /opt/cursor/cursor-wrapper.sh > /dev/null
 sudo chmod +x /opt/cursor/cursor-wrapper.sh
 
 # Update symlink to use wrapper instead of direct AppImage
