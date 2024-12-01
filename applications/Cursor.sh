@@ -10,4 +10,4 @@ Icon=/home/$USER/.local/share/omakub/applications/icons/Cursor.png
 Categories=Development;IDE;
 StartupNotify=true
 MimeType=text/plain;inode/directory;application/x-cursor-workspace;
-EOF 
+EOF
