@@ -4,13 +4,18 @@ TARGET_ARCH=$([ "$(dpkg --print-architecture)" = "arm64" ] && echo "arm64" || ec
 # Get latest release version from GitHub API
 LATEST_VERSION=$(curl -s https://api.github.com/repos/coder/cursor-arm/releases/latest | grep -Po '"tag_name": "v\K[^"]*')
 
-# Download AppImage
-wget -O cursor.AppImage "https://github.com/coder/cursor-arm/releases/download/v${LATEST_VERSION}/cursor_${LATEST_VERSION}_linux_${TARGET_ARCH}.AppImage"
-chmod +x cursor.AppImage
+# Check if we already have this version installed
+if [ -f "/opt/cursor/cursor.AppImage" ] && /opt/cursor/cursor.AppImage --version | grep -q "${LATEST_VERSION}"; then
+    echo "Cursor version ${LATEST_VERSION} is already installed. Skipping download."
+else
+    # Download AppImage
+    wget -O cursor.AppImage "https://github.com/coder/cursor-arm/releases/download/v${LATEST_VERSION}/cursor_${LATEST_VERSION}_linux_${TARGET_ARCH}.AppImage"
+    chmod +x cursor.AppImage
 
-# Create installation directory
-sudo mkdir -p /opt/cursor
-sudo mv cursor.AppImage /opt/cursor/
+    # Create installation directory
+    sudo mkdir -p /opt/cursor
+    sudo mv cursor.AppImage /opt/cursor/
+fi
 
 # Create wrapper script
 sudo cat > /opt/cursor/cursor-wrapper.sh << 'EOF'
