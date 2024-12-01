@@ -13,11 +13,11 @@ sudo mkdir -p /opt/cursor
 sudo mv cursor.AppImage /opt/cursor/
 
 # Create wrapper script
-cat > /opt/cursor/cursor-wrapper.sh << 'EOF'
+sudo cat > /opt/cursor/cursor-wrapper.sh << 'EOF'
 #!/bin/bash
 /opt/cursor/cursor.AppImage --no-sandbox "$@"
 EOF
-chmod +x /opt/cursor/cursor-wrapper.sh
+sudo chmod +x /opt/cursor/cursor-wrapper.sh
 
 # Update symlink to use wrapper instead of direct AppImage
 sudo ln -sf /opt/cursor/cursor-wrapper.sh /usr/local/bin/cursor
