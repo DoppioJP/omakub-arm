@@ -44,8 +44,17 @@ source ~/.local/share/omakub/applications/Cursor.sh
 
 cd -
 
-# mkdir -p ~/.config/Code/User
-# cp ~/.local/share/omakub/configs/vscode.json ~/.config/Code/User/settings.json
+mkdir -p ~/.config/Code/User
+cp ~/.local/share/omakub/configs/vscode.json ~/.config/Code/User/settings.json
 
 # Install default supported themes
-# code --install-extension enkia.tokyo-night
+# TODO: For now cursor does not support installing extensions from the CLI
+#       The current workaround is to install all the themes extensions manually and then switching the themes from Omakub menu should work:
+#       - Catppuccin.catppuccin-vsc
+#       - sainnhe.everforest
+#       - jdinhlife.gruvbox
+#       - qufiwefefwoyn.kanagawa
+#       - arcticicestudio.nord-visual-studio-code
+#       - mvllow.rose-pine
+#       - enkia.tokyo-night
+# cursor --install-extension enkia.tokyo-night
