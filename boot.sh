@@ -10,10 +10,17 @@ ascii_art='________                  __        ___.
 
 echo -e "$ascii_art"
 echo "=> Omakub is for fresh Ubuntu 24.04+ installations only!"
+echo "=> but it looks like you are running version for macOS	"
 echo -e "\nBegin installation (or abort with ctrl+c)..."
 
-sudo apt-get update >/dev/null
-sudo apt-get install -y git >/dev/null
+# Check if Homebrew is installed, if not, install it
+if ! command -v brew &> /dev/null; then
+  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+fi
+
+# Update Homebrew and install Git on macOS
+brew update >/dev/null
+brew install git >/dev/null
 
 echo "Cloning Omakub..."
 rm -rf ~/.local/share/omakub
