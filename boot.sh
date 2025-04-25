@@ -9,18 +9,20 @@ ascii_art='________                  __        ___.
 '
 
 echo -e "$ascii_art"
-echo "=> Omakub is for fresh Ubuntu 24.04+ installations only!"
-echo "=> but it looks like you are running version for macOS	"
+if [[ "$(uname)" == "Darwin" ]]; then
+	echo "=> Looks like you want to install Omakub on macOS. Expect some limitations."
+else
+	echo "=> Omakub is for fresh Ubuntu 24.04+ installations only!"
+fi
 echo -e "\nBegin installation (or abort with ctrl+c)..."
 
-# Check if Homebrew is installed, if not, install it
-if ! command -v brew &> /dev/null; then
-  /bin/bash -c "$(curl -fsSL https://raw.githubusercontent.com/Homebrew/install/HEAD/install.sh)"
+if [[ "$(uname)" == "Darwin" ]]; then
+	source ./install/mac/app-brew.sh >/dev/null
+	source ./install/mac/_for-boot.sh >/dev/null
+else
+	sudo apt-get update >/dev/null
+	sudo apt-get install -y git >/dev/null
 fi
-
-# Update Homebrew and install Git on macOS
-brew update >/dev/null
-brew install git >/dev/null
 
 echo "Cloning Omakub..."
 rm -rf ~/.local/share/omakub
